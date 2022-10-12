@@ -1,6 +1,5 @@
 package com.ifpr.delivery_pharmacia.models;
 
-import com.ifpr.delivery_pharmacia.enums.MedicamentoTipo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,28 +11,19 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Medicamento {
+public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String nome;
-    Float valor;
-    Boolean precisa_receita;
-
-    @Nullable
     String descricao;
+    String logradouro;
+    String bairro;
+    String numero;
+    String cidade;
+    String estado;
 
     @Nullable
-    String bula;
+    String observacao;
 
-    @Nullable
-    String imagem;
-
-    @Nullable
-    Boolean precisa_recolher_receita;
-
-    @Nullable
-    @Enumerated(EnumType.STRING)
-    MedicamentoTipo tipo;
 }

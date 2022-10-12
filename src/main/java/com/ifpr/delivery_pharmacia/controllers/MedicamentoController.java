@@ -14,7 +14,7 @@ public class MedicamentoController {
 
     MedicamentoRepository repository;
 
-    @GetMapping("/medicamento/")
+    @GetMapping("/medicamento")
     public List<Medicamento> getAllMedicamentos(){
         return  repository.findAll();
     }
@@ -34,8 +34,8 @@ public class MedicamentoController {
         return  repository.save(medicamento);
     }
 
-    @PutMapping("/medicamento/edit/")
-    public Medicamento editPerson(@RequestBody Medicamento medicamento ){
+    @PutMapping("/medicamento/edit")
+    public Medicamento editMedicamento(@RequestBody Medicamento medicamento ){
         return repository.save(medicamento);
     }
 

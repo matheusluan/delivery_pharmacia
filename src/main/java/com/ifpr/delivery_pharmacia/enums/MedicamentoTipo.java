@@ -1,9 +1,11 @@
 package com.ifpr.delivery_pharmacia.enums;
 
 public enum MedicamentoTipo {
-    OUTROS,             // 0
-    HIGIENE,            // 1
-    BEBE,               // 2
-    ANTIBIOTICOS        // 3
+    ANTIBIOTICOS,               // 0
+    VITAMINAS,                  // 1
+    INJETAVEIS,                 // 2
+    HIGIENE,                    // 3
+    GENERICOS                   // 4
+
 
 }

@@ -1,24 +1,27 @@
 package com.ifpr.delivery_pharmacia.models;
 
-import com.ifpr.delivery_pharmacia.enums.PessoaTipo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pessoa {
+public class Cliente{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String nome;
     String celular;
 
-    @Enumerated(EnumType.STRING)
-    PessoaTipo tipo;
+    @OneToMany
+    @Nullable
+    List<Endereco> enderecos;
+
 }
