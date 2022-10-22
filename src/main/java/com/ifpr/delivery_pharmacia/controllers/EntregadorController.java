@@ -1,9 +1,7 @@
 package com.ifpr.delivery_pharmacia.controllers;
 
 import com.ifpr.delivery_pharmacia.models.Entregador;
-import com.ifpr.delivery_pharmacia.models.Farmaceutico;
 import com.ifpr.delivery_pharmacia.repositories.EntregadorRepository;
-import com.ifpr.delivery_pharmacia.repositories.FarmaceuticoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
