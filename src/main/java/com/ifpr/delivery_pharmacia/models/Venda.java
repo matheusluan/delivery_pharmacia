@@ -31,6 +31,9 @@ public class Venda {
     @OneToMany(cascade=CascadeType.PERSIST)
     List<VendaItem> itens;
 
+    @OneToMany(cascade=CascadeType.PERSIST)
+    List<Venda_receita> receitas;
+
     @OneToOne
     @JoinColumn(name = "cliente_id")
     Cliente cliente;

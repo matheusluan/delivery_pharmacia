@@ -22,16 +22,15 @@ public class Medicamento {
     Boolean precisa_receita;
 
     @Nullable
+    String fabricante;
+    String formula;
+    String conteudo;
+    String uso;
     String descricao;
-
-    @Nullable
     String bula;
-
-    @Nullable
     String imagem;
-
-    @Nullable
     Boolean precisa_recolher_receita;
+
 
     @Nullable
     @Enumerated(EnumType.STRING)
