@@ -50,24 +50,9 @@ public class ProdutoController {
 
         repository.save(produto);
 
-        try {
-           if(!arquivo.isEmpty()){
-               byte [] bytes = arquivo.getBytes();
+        saveArquivoProduto(produto, arquivo);
 
-               String new_name =  RandomString.make(25)+"."+FilenameUtils.getExtension(arquivo.getOriginalFilename());
-
-               Path caminho = Paths.get(diretorio_produtos+ produto.getId()+"_"+new_name);
-               Files.write(caminho, bytes);
-
-               produto.setImagem(new_name);
-
-               repository.save(produto);
-           }
-        }catch (IOException e){
-            throw new RuntimeException("Problemas na tentativa de salvar arquivo.", e);
-        }
-
-        return produto;
+        return repository.save(produto);
     }
 
     @PostMapping("/produto/add_img/{id}")
@@ -79,24 +64,9 @@ public class ProdutoController {
             throw new RuntimeException("Produto com id " + id +" não encontado!");
         }
 
-        try {
-            if(!arquivo.isEmpty()){
-                byte [] bytes = arquivo.getBytes();
+        saveArquivoProduto(produto, arquivo);
 
-                String new_name =  RandomString.make(25)+"."+FilenameUtils.getExtension(arquivo.getOriginalFilename());
-
-                Path caminho = Paths.get(diretorio_produtos+ produto.getId()+"_"+new_name);
-                Files.write(caminho, bytes);
-
-                produto.setImagem(new_name);
-
-                repository.save(produto);
-            }
-        }catch (IOException e){
-            throw new RuntimeException("Problemas na tentativa de salvar arquivo.", e);
-        }
-
-        return produto;
+        return repository.save(produto);
     }
 
 
@@ -108,6 +78,26 @@ public class ProdutoController {
     @DeleteMapping("produto/delete/{id}")
     public void deleteMedicamento(@PathVariable Long id){
         repository.deleteById(id);
+    }
+
+    private Produto saveArquivoProduto(Produto produto, MultipartFile arquivo){
+        try {
+            if(!arquivo.isEmpty()){
+                byte [] bytes = arquivo.getBytes();
+
+                String new_name =  RandomString.make(25)+"."+FilenameUtils.getExtension(arquivo.getOriginalFilename());
+
+                Path caminho = Paths.get(diretorio_produtos+ produto.getId()+"_"+new_name);
+                Files.write(caminho, bytes);
+
+                produto.setImagem(new_name);
+
+            }
+        }catch (IOException e){
+            throw new RuntimeException("Problemas na tentativa de salvar arquivo.", e);
+        }
+
+        return produto;
     }
 
 }
