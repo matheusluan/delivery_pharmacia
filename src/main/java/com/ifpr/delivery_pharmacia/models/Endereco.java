@@ -26,5 +26,4 @@ public class Endereco {
 
     @Nullable
     String observacao;
-
 }

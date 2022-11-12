@@ -1,25 +1,29 @@
 package com.ifpr.delivery_pharmacia.models;
 
-import com.ifpr.delivery_pharmacia.enums.MedicamentoTipo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Medicamento {
+public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String nome;
-    Float valor;
+    Float valor_unitario;
     Boolean precisa_receita;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    Date dh_registro;
 
     @Nullable
     String fabricante;
@@ -32,7 +36,7 @@ public class Medicamento {
     Boolean precisa_recolher_receita;
 
 
-    @Nullable
-    @Enumerated(EnumType.STRING)
-    MedicamentoTipo tipo;
+    @OneToOne
+    @JoinColumn(name = "categoria_id")
+    Categoria categoria;
 }

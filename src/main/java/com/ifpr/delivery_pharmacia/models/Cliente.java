@@ -19,9 +19,12 @@ public class Cliente{
     Long id;
     String nome;
     String celular;
+    String login;
+    String senha;
 
-    @OneToMany
+
     @Nullable
+    @OneToMany(cascade=CascadeType.PERSIST)
     List<Endereco> enderecos;
 
 }

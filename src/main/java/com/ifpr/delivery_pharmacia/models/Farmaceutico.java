@@ -16,7 +16,11 @@ public class Farmaceutico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String nome;
-    String celular;
-    String documento;
+    String telefone;
+    String login;
+    String senha;
+
+    @Column(unique=true)
+    String crf;
 
 }

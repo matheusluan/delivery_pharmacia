@@ -23,16 +23,21 @@ public class Venda {
     Float valor_produtos;
     Float valor_frete;
     Float valor_total;
+    String nome_entregador;
+    String telefone_entregador;
+
+    @Temporal(TemporalType.TIMESTAMP)
     Date dh_registro;
 
     @Nullable
     String observacoes;
 
-    @OneToMany(cascade=CascadeType.PERSIST)
-    List<VendaItem> itens;
 
     @OneToMany(cascade=CascadeType.PERSIST)
-    List<Venda_receita> receitas;
+    List<Item> itens;
+
+    @OneToMany(cascade=CascadeType.PERSIST)
+    List<Receita> receitas;
 
     @OneToOne
     @JoinColumn(name = "cliente_id")
@@ -45,9 +50,6 @@ public class Venda {
     @OneToOne
     @JoinColumn(name = "farmaceutico_id")
     Farmaceutico farmaceutico;
-
-    @OneToOne
-    Entregador entregador;
 
     @Enumerated(EnumType.STRING)
     VendaStatus status;

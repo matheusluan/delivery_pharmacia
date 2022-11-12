@@ -10,18 +10,18 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VendaItem {
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    Integer item;
+    String item;
     Integer quantidade;
     Float valor_unitario;
     Float valor_total;
 
     @OneToOne
-    @JoinColumn(name = "medicamento_id")
-    Medicamento medicamento;
+    @JoinColumn(name = "produto_id")
+    Produto produto;
 
 }
