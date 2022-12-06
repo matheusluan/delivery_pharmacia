@@ -30,9 +30,16 @@ public class Produto {
     String formula;
     String conteudo;
     String uso;
+
+    @Column(name="descricao", length=5000)
     String descricao;
+
+    @Column(name="bula", length=5000)
     String bula;
+
+    @Column(name="imagem", length=5000)
     String imagem;
+
     Boolean precisa_recolher_receita;
 
 

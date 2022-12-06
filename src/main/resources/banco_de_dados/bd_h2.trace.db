@@ -243,3 +243,15 @@ select * from venda_itens where id_venda = 3 [42122-214]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-12-06 16:45:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "IMAGEM CHARACTER VARYING(255)": "'https://www.google.com/imgres?imgurl=https%3A%2F%2Fstatic.vecteezy.com%2Fti%2Fv... (521)"; SQL statement:
+insert into produto (id, bula, categoria_id, conteudo, descricao, dh_registro, fabricante, formula, imagem, nome, precisa_receita, precisa_recolher_receita, uso, valor_unitario) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-12-06 16:50:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "IMAGEM CHARACTER VARYING(255)": "'https://www.istockphoto.com/br/foto/levita%C3%A7%C3%A3o-de-p%C3%ADlulas-em-um-f... (294)"; SQL statement:
+insert into produto (id, bula, categoria_id, conteudo, descricao, dh_registro, fabricante, formula, imagem, nome, precisa_receita, precisa_recolher_receita, uso, valor_unitario) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-12-06 16:51:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "IMAGEM CHARACTER VARYING(512)": "'https://www.google.com/imgres?imgurl=https%3A%2F%2Fstatic.vecteezy.com%2Fti%2Fv... (521)"; SQL statement:
+insert into produto (id, bula, categoria_id, conteudo, descricao, dh_registro, fabricante, formula, imagem, nome, precisa_receita, precisa_recolher_receita, uso, valor_unitario) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2022-12-06 16:52:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRICAO CHARACTER VARYING(255)": "U&'Indicado para o tratamento de uma s\\00e9rie de processos infecciosos causados... (264)"; SQL statement:
+insert into produto (id, bula, categoria_id, conteudo, descricao, dh_registro, fabricante, formula, imagem, nome, precisa_receita, precisa_recolher_receita, uso, valor_unitario) values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-214]
