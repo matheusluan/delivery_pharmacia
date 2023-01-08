@@ -19,6 +19,7 @@ public class Cliente{
     Long id;
     String nome;
     String celular;
+    String cpf;
     String login;
     String senha;
 
