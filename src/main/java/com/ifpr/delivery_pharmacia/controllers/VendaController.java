@@ -7,7 +7,6 @@ import com.ifpr.delivery_pharmacia.repositories.*;
 import lombok.AllArgsConstructor;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,13 +37,13 @@ public class VendaController {
         return repository.findAll();
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_FARMACEUTICO')")
+
     @GetMapping("/venda/one")
     public Venda getVenda(@RequestParam Long id) {
         return repository.findById(id).get();
     }
 
-    @PreAuthorize("hasRole('ROLE_FARMACEUTICO')")
+
     @GetMapping("/venda/statusAndCliente")
     public List<Venda> getVendaByStatusAndCliente(@RequestParam VendaStatus status, @RequestParam Long cliente_id) {
 
@@ -53,7 +52,6 @@ public class VendaController {
         return repository.findByStatusAndCliente(status, usuario);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_CLIENTE', 'ROLE_FARMACEUTICO')")
     @GetMapping("/venda/status")
     public List<Venda> getVendaByStatus(@RequestParam VendaStatus status) {
 
@@ -61,7 +59,6 @@ public class VendaController {
         return repository.findByStatus(status);
     }
 
-    @PreAuthorize("hasRole('ROLE_CLIENTE')")
     @PostMapping("/venda/add")
     public Venda addVenda(@RequestBody Venda venda) {
 
@@ -71,7 +68,7 @@ public class VendaController {
         return repository.save(venda);
     }
 
-    @PreAuthorize("hasRole('ROLE_CLIENTE')")
+
     @PostMapping("/venda/add_with_image")
     @Transactional
     public Venda addVendaComImagem(@ModelAttribute Venda venda, @RequestParam("imagens_receitas") MultipartFile[] uploadingFiles) {
@@ -113,13 +110,12 @@ public class VendaController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_CLIENTE')")
+
     @PutMapping("/venda/edit")
     public Venda editVenda(@RequestBody Venda venda) {
         return repository.save(venda);
     }
 
-    @PreAuthorize("hasRole('ROLE_FARMACEUTICO')")
     @PutMapping("/venda/edit_status/{id}/{status}")
     public Venda editVendaStatus(@PathVariable Long id, @PathVariable VendaStatus status) {
 

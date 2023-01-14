@@ -12,7 +12,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     @Bean
@@ -21,14 +20,13 @@ public class SecurityConfig {
                 .httpBasic()
                 .and()
                 .authorizeHttpRequests()
-
                 .antMatchers("/cliente/add",
                              "/farmaceutico/add",
                              "/produto",
                              "/categoria",
                              "/cliente",
-                             "/adicionar").permitAll()
-                /*
+                             "/adicionar")
+                .permitAll()
                 .antMatchers("/cliente/edit/**",
                              "/venda/add",
                              "/venda/add_with_image",
@@ -39,8 +37,6 @@ public class SecurityConfig {
                              "/venda/status",
                              "/venda/edit_status/**")
                 .hasRole("FARMACEUTICO")
-
-     */
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();

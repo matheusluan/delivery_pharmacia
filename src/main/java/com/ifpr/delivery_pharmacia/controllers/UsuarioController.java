@@ -9,14 +9,12 @@ import com.ifpr.delivery_pharmacia.repositories.EnderecoRepository;
 import com.ifpr.delivery_pharmacia.repositories.RoleRepository;
 import com.ifpr.delivery_pharmacia.repositories.UsuarioRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -139,7 +137,7 @@ public class UsuarioController {
 
 
     //Edita o cliente
-    @PreAuthorize("hasRole('ROLE_CLIENTE')")
+
     @PutMapping("/cliente/edit/{id}")
     public Usuario editCliente(@RequestBody Usuario usuario, @PathVariable Long id  ){
 
@@ -179,7 +177,7 @@ public class UsuarioController {
     }
 
     //Edita o farmaceutico
-    @PreAuthorize("hasRole('ROLE_FARMACEUTICO')")
+
     @PutMapping("/farmaceutico/edit/{id}")
     public Usuario editFarmaceutico(@RequestBody Usuario usuario, @PathVariable Long id  ){
 
@@ -219,7 +217,7 @@ public class UsuarioController {
     }
 
     //Cadastra novo endereço no cliente
-    @PreAuthorize("hasRole('ROLE_CLIENTE')")
+
     @PostMapping("/cliente/endereco/{id}")
     public Usuario addEndereco(@RequestBody Endereco endereco, @PathVariable Long id ){
 
@@ -241,7 +239,6 @@ public class UsuarioController {
 
     //Altera um endereço com base no id do endereço
     @PutMapping ("/endereco/{id}/{id_cliente}")
-    @PreAuthorize("hasRole('ROLE_CLIENTE')")
     public Endereco EditEndereco(@RequestBody Endereco endereco, @PathVariable Long id) {
 
         try {
