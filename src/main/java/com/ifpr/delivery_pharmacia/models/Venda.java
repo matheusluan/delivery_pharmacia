@@ -41,7 +41,7 @@ public class Venda {
 
     @OneToOne
     @JoinColumn(name = "cliente_id")
-    Cliente cliente;
+    Usuario cliente;
 
     @OneToOne
     @JoinColumn(name = "endereco_id")
@@ -49,7 +49,7 @@ public class Venda {
 
     @OneToOne
     @JoinColumn(name = "farmaceutico_id")
-    Farmaceutico farmaceutico;
+    Usuario farmaceutico;
 
     @Enumerated(EnumType.STRING)
     VendaStatus status;

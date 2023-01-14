@@ -1,30 +1,29 @@
 package com.ifpr.delivery_pharmacia.services;
 
+import com.ifpr.delivery_pharmacia.enums.RoleName;
 import com.ifpr.delivery_pharmacia.models.*;
 import com.ifpr.delivery_pharmacia.repositories.*;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @RestController
 @AllArgsConstructor
 public class Service {
 
-    ClienteRepository pessoa_repository;
-    FarmaceuticoRepository farmaceutico_repository;
+    UsuarioRepository pessoa_repository;
     ProdutoRepository medicamento_repository;
 
     VendaRepository venda_repository;
 
     EnderecoRepository endereco_repository;
+
     CategoriaRepository categoria_repository;
+
+    RoleRepository role_repository;
 
     @PostMapping("/adicionar")
     public void getAllPerson(){
-
 
         //Categoria
         Categoria categoria_1 = new Categoria();
@@ -56,6 +55,8 @@ public class Service {
         categoria_repository.save(categoria_6);
         categoria_repository.save(categoria_7);
 
+
+        /*
         //Endereço
         Endereco end_1 = new Endereco();
         end_1.setDescricao("Casa");
@@ -113,30 +114,34 @@ public class Service {
         end_5.setPrincipal(false);
         endereco_repository.save(end_2);
 
+
         //Adiciona as pessoas
         Cliente cliente_1 = new Cliente();
         cliente_1.setNome("Matheus Luan");
         cliente_1.setCelular("45 9999999");
         cliente_1.setLogin("matheus123");
-        cliente_1.setSenha("123");
+        cliente_1.setSenha(utils.passwordEncoder().encode("123"));
 
         Cliente cliente_2 = new Cliente();
         cliente_2.setCelular("45 9999999");
         cliente_2.setLogin("ademir123");
+        cliente_2.setCpf("12114141");
         cliente_2.setNome("Ademir Silva");
-        cliente_2.setSenha("123");
+        cliente_2.setSenha(utils.passwordEncoder().encode("123"));
 
         Cliente cliente_3 = new Cliente();
         cliente_3.setCelular("45 9999999");
         cliente_3.setLogin("ramos123");
+        cliente_3.setCpf("1432414124");
         cliente_3.setNome("João Ramos");
-        cliente_3.setSenha("ramos123");
+        cliente_3.setSenha(utils.passwordEncoder().encode("123"));
 
         Cliente cliente_4 = new Cliente();
         cliente_4.setCelular("45 9999999");
         cliente_4.setLogin("Flavia123");
         cliente_4.setNome("Flavia Santos");
-        cliente_4.setSenha("flavia123");
+        cliente_4.setCpf("12313213");
+        cliente_4.setSenha(utils.passwordEncoder().encode("123"));
 
         List<Endereco> enderecos = new ArrayList<>();
         List<Endereco> enderecos2 = new ArrayList<>();
@@ -172,7 +177,19 @@ public class Service {
         pessoa_repository.save(cliente_3);
         pessoa_repository.save(cliente_4);
 
-        //Adiciona as medicamento
+        */
+
+        //Adiciona as roles
+        Role role_cliente = new Role();
+        role_cliente.setRoleName(RoleName.ROLE_CLIENTE);
+        role_repository.save(role_cliente);
+
+        Role role_farmaceutico = new Role();
+        role_farmaceutico.setRoleName(RoleName.ROLE_FARMACEUTICO);
+
+        role_repository.save(role_farmaceutico);
+
+        //Adiciona os medicamento
         Produto produto_1 = new Produto();
         produto_1.setNome("Neosoro");
         produto_1.setValor_unitario(5.00F);
@@ -280,8 +297,6 @@ public class Service {
         produto_10.setUso("Uso adulto e infantil");
         produto_10.setPrecisa_receita(true);
         produto_10.setDescricao("Antibióticos do grupo dos betalactâmicos profusamente utilizados no tratamento de infecções causadas por bactérias sensíveis.");
-
-
 
         medicamento_repository.save(produto_1);
         medicamento_repository.save(produto_2);
