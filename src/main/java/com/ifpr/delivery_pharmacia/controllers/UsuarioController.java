@@ -24,6 +24,8 @@ public class UsuarioController {
     EnderecoRepository endereco_repo;
     RoleRepository role_repo;
 
+
+
     //Busca os clientes
     @GetMapping("/cliente")
     public List<Usuario> getAllCliente(){
@@ -46,6 +48,18 @@ public class UsuarioController {
         else
             throw new RuntimeException("ID não encontrado ou não é um cliente");
     }
+
+    @GetMapping("/login/{username}")
+    public Usuario login(@PathVariable String username){
+
+        Usuario usuario = repository.findByUsername(username);
+
+        if(usuario != null)
+            return usuario ;
+        else
+            throw new RuntimeException("Usuário não encontrado");
+    }
+
 
     @GetMapping("/farmaceutico/{id}")
     public Usuario getFarmaceutico(@PathVariable Long id){

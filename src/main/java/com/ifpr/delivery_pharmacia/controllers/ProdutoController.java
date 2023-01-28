@@ -28,6 +28,17 @@ public class ProdutoController {
         return  repository.findAll();
     }
 
+    @GetMapping("/produtos")
+    public  List<Produto> getProdutoByDesc(@RequestParam String nome){
+
+        if(nome != null ){
+            return repository.findByNomeContains(nome);
+        }else
+            throw new RuntimeException("Filtro vazio");
+
+
+    }
+
     @GetMapping("/produto/{id}")
     public Produto getMedicamento(@PathVariable Long id){
         return  repository.findById(id).get();
