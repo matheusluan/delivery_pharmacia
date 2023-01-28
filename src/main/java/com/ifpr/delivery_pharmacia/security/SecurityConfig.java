@@ -27,6 +27,7 @@ public class SecurityConfig {
                              "/cliente",
                              "/adicionar")
                 .permitAll()
+                /*
                 .antMatchers("/cliente/edit/**",
                              "/venda/add",
                              "/venda/add_with_image",
@@ -37,6 +38,7 @@ public class SecurityConfig {
                              "/venda/status",
                              "/venda/edit_status/**")
                 .hasRole("FARMACEUTICO")
+                */
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();

@@ -1,12 +1,14 @@
 package com.ifpr.delivery_pharmacia.controllers;
 
 
+import com.ifpr.delivery_pharmacia.S3.StorageService;
 import com.ifpr.delivery_pharmacia.enums.VendaStatus;
 import com.ifpr.delivery_pharmacia.models.*;
 import com.ifpr.delivery_pharmacia.repositories.*;
 import lombok.AllArgsConstructor;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +32,8 @@ public class VendaController {
     UsuarioRepository cliente_repository;
     ProdutoRepository produto_repository;
 
+    @Autowired
+    private StorageService service;
     static String diretorio_receitas = "src/main/resources/imagens/receitas/";
 
     @GetMapping("/venda")
@@ -84,20 +88,11 @@ public class VendaController {
             for (MultipartFile arquivo : uploadingFiles) {
                 try {
                     if (!arquivo.isEmpty()) {
-                        byte[] bytes = arquivo.getBytes();
-
-                        String new_name = RandomString.make(25) + "." + FilenameUtils.getExtension(arquivo.getOriginalFilename());
-
-                        Path caminho = Paths.get(diretorio_receitas + new_name);
-
-                        Files.write(caminho, bytes);
-
                         Receita receita = new Receita();
-                        receita.setArquivo(new_name);
+                        receita.setArquivo(service.uploadFile(arquivo));
                         receitas.add(receita);
-
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     throw new RuntimeException("Problemas na tentativa de salvar arquivo.", e);
                 }
             }
