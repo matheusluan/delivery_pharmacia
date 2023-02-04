@@ -20,9 +20,9 @@ public class Venda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    Float valor_produtos;
-    Float valor_frete;
-    Float valor_total;
+    Double valor_produtos;
+    Double valor_frete;
+    Double valor_total;
     String nome_entregador;
     String telefone_entregador;
 

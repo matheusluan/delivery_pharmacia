@@ -9,6 +9,11 @@ import com.ifpr.delivery_pharmacia.repositories.*;
 import lombok.AllArgsConstructor;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +21,28 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.net.Authenticator;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.http.HttpClient;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 
 @RestController
@@ -37,6 +57,8 @@ public class VendaController {
     AtualizacaoRepository atualizacao_repository;
 
     ReceitaRepository receita_repository;
+
+    EnderecoRepository endereco_repository;
 
     @Autowired
     private StorageService service;
@@ -207,7 +229,7 @@ public class VendaController {
     private Venda setValoresVenda(Venda venda){
 
         List<Item> venda_itens = new ArrayList<>();
-        Float valor_total_venda_produtos = 0F;
+        Double valor_total_venda_produtos = 0.0;
 
         //Bloco pra calcular o valor total do item
         for (Item item : venda.getItens()) {
@@ -226,8 +248,56 @@ public class VendaController {
 
         //Valor dos produtos
         venda.setValor_produtos(valor_total_venda_produtos);
+
+        //Bloco pra fazer o get de calculo do frete
+        Double valor_frete = 0.0;
+
+        Endereco endereco_venda =  endereco_repository.findById(venda.getEndereco().getId()).get();
+
+        if(endereco_venda == null || endereco_venda.getCep() == null || endereco_venda.getCep().isEmpty()){
+            throw new RuntimeException("Por favor envie um endereço/cep valido");
+        }
+
+        try {
+
+            URL url = new URL("http://18.231.178.72:3333/frete/cep?cep=85860000&cep_destino="+endereco_venda.getCep());
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+
+            //Check if connect is made
+            int responseCode = conn.getResponseCode();
+
+            // 200 OK
+            if (responseCode != 200) {
+                throw new RuntimeException("HttpResponseCode: " + responseCode);
+            } else {
+
+                StringBuilder informationString = new StringBuilder();
+                Scanner scanner = new Scanner(url.openStream());
+
+                while (scanner.hasNext()) {
+                    informationString.append(scanner.nextLine());
+                }
+                //Close the scanner
+                scanner.close();
+
+                ObjectMapper mapper = new ObjectMapper();
+
+                JsonNode node = mapper.readTree(informationString.toString());
+
+                valor_frete = node.get("valorDoFrete").asDouble();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //Seta valor do frete
+        venda.setValor_frete(valor_frete);
+
         //Calcula o valor total da venda (itens + frete)
-        venda.setValor_total(valor_total_venda_produtos + (venda.getValor_frete() != null ? venda.getValor_frete() : 0 ));
+        venda.setValor_total(valor_total_venda_produtos + valor_frete);
 
         return  venda;
     }

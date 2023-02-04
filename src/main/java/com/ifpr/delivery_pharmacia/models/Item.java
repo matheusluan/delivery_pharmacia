@@ -15,7 +15,6 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String item;
     Integer quantidade;
     Float valor_unitario;
     Float valor_total;
