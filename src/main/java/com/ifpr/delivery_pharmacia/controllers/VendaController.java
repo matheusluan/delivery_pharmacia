@@ -1,6 +1,7 @@
 package com.ifpr.delivery_pharmacia.controllers;
 
 
+
 import com.ifpr.delivery_pharmacia.S3.StorageService;
 import com.ifpr.delivery_pharmacia.enums.VendaStatus;
 import com.ifpr.delivery_pharmacia.models.*;
@@ -9,9 +10,9 @@ import lombok.AllArgsConstructor;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -20,6 +21,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 
 
 @RestController
@@ -32,6 +35,8 @@ public class VendaController {
     UsuarioRepository cliente_repository;
     ProdutoRepository produto_repository;
     AtualizacaoRepository atualizacao_repository;
+
+    ReceitaRepository receita_repository;
 
     @Autowired
     private StorageService service;
@@ -53,6 +58,23 @@ public class VendaController {
 
         Venda venda = repository.findById(id).get();
         return venda.getAtualizacoes();
+    }
+
+    //Busca as imagens da venda
+
+    @GetMapping("/download/{arquivo}")
+    public HttpEntity<byte[]> download(@PathVariable String arquivo) throws IOException {
+
+            byte[] file = Files.readAllBytes( Paths.get(diretorio_receitas + arquivo) );
+
+            HttpHeaders httpHeaders = new HttpHeaders();
+
+            httpHeaders.add("Content-Disposition", "attachment;filename=\""+arquivo+"\"");
+
+            HttpEntity<byte[]> entity = new HttpEntity<byte[]>( file, httpHeaders);
+
+            return entity;
+
     }
 
 
