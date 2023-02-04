@@ -25,20 +25,10 @@ public class SecurityConfig {
                              "/produto",
                              "/categoria",
                              "/cliente",
-                             "/adicionar")
+                             "/adicionar",
+                             "h2admin/**",
+                             "\"src/main/resources/imagens/receitas/\"")
                 .permitAll()
-                /*
-                .antMatchers("/cliente/edit/**",
-                             "/venda/add",
-                             "/venda/add_with_image",
-                             "/venda/edit")
-                .hasRole("CLIENTE")
-                .antMatchers("/farmaceutico/edit/**",
-                             "/venda/statusAndCliente",
-                             "/venda/status",
-                             "/venda/edit_status/**")
-                .hasRole("FARMACEUTICO")
-                */
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();
