@@ -23,7 +23,15 @@ public class Atualizacao {
 
     @NotNull
     VendaStatus status;
+
     @NotNull
     Date dh_atualizacao = new Date();
+
+    @Column(name="observacao", length=5000)
+    String observacao;
+
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    Usuario usuario;
 
 }

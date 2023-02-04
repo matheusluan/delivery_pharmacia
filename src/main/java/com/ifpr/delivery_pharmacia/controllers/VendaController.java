@@ -9,11 +9,6 @@ import com.ifpr.delivery_pharmacia.repositories.*;
 import lombok.AllArgsConstructor;
 import net.bytebuddy.utility.RandomString;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.http.HttpClient;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,10 +28,6 @@ import java.util.Scanner;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 
-
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Scanner;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,7 +41,7 @@ public class VendaController {
     VendaRepository repository;
     VendaItemRepository venda_item_repository;
     VendaReceitaRepository venda_receita_repository;
-    UsuarioRepository cliente_repository;
+    UsuarioRepository usuarioRepository;
     ProdutoRepository produto_repository;
     AtualizacaoRepository atualizacao_repository;
 
@@ -103,7 +92,7 @@ public class VendaController {
     @GetMapping("/venda/statusAndCliente")
     public List<Venda> getVendaByStatusAndCliente(@RequestParam VendaStatus status, @RequestParam Long cliente_id) {
 
-        Usuario usuario = cliente_repository.findById(cliente_id).get();
+        Usuario usuario = usuarioRepository.findById(cliente_id).get();
 
         return repository.findByStatusAndCliente(status, usuario);
     }
@@ -111,7 +100,7 @@ public class VendaController {
     @GetMapping("/venda/cliente/{id}")
     public List<Venda> getVendaCliente( @PathVariable Long id) {
 
-        Usuario usuario = cliente_repository.findById(id).get();
+        Usuario usuario = usuarioRepository.findById(id).get();
 
         return repository.findByCliente( usuario);
     }
@@ -204,25 +193,27 @@ public class VendaController {
         return repository.save(venda);
     }
 
-    @PutMapping("/venda/edit_status/{id}/{status}")
-    public Venda editVendaStatus(@PathVariable Long id, @PathVariable VendaStatus status) {
+    @PutMapping("/venda/edit_status/{id}")
+    public Venda editVendaStatus(@PathVariable Long id, @RequestBody Atualizacao att) {
 
-        Venda venda = repository.findById(id).get();
-        venda.setStatus(status);
+        try {
+            //Salva a atualização
+            atualizacao_repository.save(att);
 
-        //Seta a atualização com status que veio no body
-        Atualizacao att = new Atualizacao();
-        att.setStatus(status);
+            Venda venda = repository.findById(id).get();
+            venda.setStatus(att.getStatus());
 
-        atualizacao_repository.save(att);
+            List<Atualizacao> atts = new ArrayList<>();
+            atts = venda.getAtualizacoes();
+            atts.add(att);
 
-        List<Atualizacao> atts = new ArrayList<>();
-        atts = venda.getAtualizacoes();
-        atts.add(att);
+            venda.setAtualizacoes(atts);
 
-        venda.setAtualizacoes(atts);
+            return repository.save(venda);
+        }catch (Exception ex){
+            throw new RuntimeException("Erro ao alterar status da venda");
+        }
 
-        return repository.save(venda);
     }
 
     //Bloco para calcular os valores totais da venda

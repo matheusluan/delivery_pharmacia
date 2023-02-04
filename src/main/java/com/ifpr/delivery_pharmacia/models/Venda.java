@@ -49,9 +49,6 @@ public class Venda {
     @JoinColumn(name = "endereco_id")
     Endereco endereco;
 
-    @OneToOne
-    @JoinColumn(name = "farmaceutico_id")
-    Usuario farmaceutico;
 
     @Enumerated(EnumType.STRING)
     VendaStatus status;
