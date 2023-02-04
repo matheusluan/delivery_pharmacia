@@ -11,4 +11,6 @@ public interface VendaRepository extends JpaRepository<Venda, Long> {
 
     List<Venda> findByStatusAndCliente(VendaStatus status, Usuario usuario);
     List<Venda> findByStatus(VendaStatus status);
+
+    List<Venda> findByCliente( Usuario usuario);
 }

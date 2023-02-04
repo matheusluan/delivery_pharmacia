@@ -27,17 +27,19 @@ public class Venda {
     String telefone_entregador;
 
     @Temporal(TemporalType.TIMESTAMP)
-    Date dh_registro;
+    Date dh_registro = new Date();
 
     @Nullable
     String observacoes;
-
 
     @OneToMany(cascade=CascadeType.PERSIST)
     List<Item> itens;
 
     @OneToMany(cascade=CascadeType.PERSIST)
     List<Receita> receitas;
+
+    @OneToMany(cascade=CascadeType.PERSIST)
+    List<Atualizacao> atualizacoes;
 
     @OneToOne
     @JoinColumn(name = "cliente_id")

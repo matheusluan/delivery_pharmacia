@@ -31,6 +31,7 @@ public class VendaController {
     VendaReceitaRepository venda_receita_repository;
     UsuarioRepository cliente_repository;
     ProdutoRepository produto_repository;
+    AtualizacaoRepository atualizacao_repository;
 
     @Autowired
     private StorageService service;
@@ -41,10 +42,17 @@ public class VendaController {
         return repository.findAll();
     }
 
-
     @GetMapping("/venda/one")
     public Venda getVenda(@RequestParam Long id) {
         return repository.findById(id).get();
+    }
+
+    //Busca as atualizações da venda
+    @GetMapping("/venda/atts/{id}")
+    public List<Atualizacao> getAttsVenda(@PathVariable Long id) {
+
+        Venda venda = repository.findById(id).get();
+        return venda.getAtualizacoes();
     }
 
 
@@ -55,6 +63,15 @@ public class VendaController {
 
         return repository.findByStatusAndCliente(status, usuario);
     }
+
+    @GetMapping("/venda/cliente/{id}")
+    public List<Venda> getVendaCliente( @PathVariable Long id) {
+
+        Usuario usuario = cliente_repository.findById(id).get();
+
+        return repository.findByCliente( usuario);
+    }
+
 
     @GetMapping("/venda/status")
     public List<Venda> getVendaByStatus(@RequestParam VendaStatus status) {
@@ -68,6 +85,16 @@ public class VendaController {
 
         //chama o método que calcula os valores totais da venda
         venda = setValoresVenda(venda);
+
+        venda.setStatus(VendaStatus.SOLICITADA);
+
+        Atualizacao att = new Atualizacao();
+        att.setStatus(VendaStatus.SOLICITADA);
+
+        List<Atualizacao> atts = new ArrayList<>();
+        atts.add(att);
+
+        venda.setAtualizacoes(atts);
 
         return repository.save(venda);
     }
@@ -83,6 +110,18 @@ public class VendaController {
 
             //chama o método que calcula os valores totais da venda
             venda = setValoresVenda(venda);
+
+            //Seta o status de SOLICITADA
+            venda.setStatus(VendaStatus.SOLICITADA);
+
+            //Seta a atualização com status de SOLICITADA
+            Atualizacao att = new Atualizacao();
+            att.setStatus(VendaStatus.SOLICITADA);
+
+            List<Atualizacao> atts = new ArrayList<>();
+            atts.add(att);
+
+            venda.setAtualizacoes(atts);
 
             //Bloco pra pegar os arquivos enviados
             for (MultipartFile arquivo : uploadingFiles) {
@@ -116,6 +155,18 @@ public class VendaController {
 
         Venda venda = repository.findById(id).get();
         venda.setStatus(status);
+
+        //Seta a atualização com status que veio no body
+        Atualizacao att = new Atualizacao();
+        att.setStatus(status);
+
+        atualizacao_repository.save(att);
+
+        List<Atualizacao> atts = new ArrayList<>();
+        atts = venda.getAtualizacoes();
+        atts.add(att);
+
+        venda.setAtualizacoes(atts);
 
         return repository.save(venda);
     }
