@@ -23,7 +23,6 @@ public class Endereco {
     String cidade;
     String estado;
     String cep;
-    Boolean principal;
 
     @Nullable
     String observacao;
