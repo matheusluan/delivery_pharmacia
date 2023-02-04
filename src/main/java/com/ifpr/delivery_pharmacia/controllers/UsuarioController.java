@@ -293,10 +293,6 @@ public class UsuarioController {
                     old_endereco.setObservacao(endereco.getObservacao());
                 }
 
-                if (endereco.getPrincipal() != null) {
-                    old_endereco.setPrincipal(endereco.getPrincipal());
-
-                }
                 return endereco_repo.save(old_endereco);
             }
         }catch(Exception ex ){

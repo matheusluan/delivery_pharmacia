@@ -35,7 +35,7 @@ public class VendaController {
 
     @Autowired
     private StorageService service;
-    static String diretorio_receitas = "src/main/resources/imagens/receitas/";
+    static String diretorio_receitas = "/imagens/receitas/";
 
     @GetMapping("/venda")
     public List<Venda> getAllVenda() {
@@ -127,11 +127,21 @@ public class VendaController {
             for (MultipartFile arquivo : uploadingFiles) {
                 try {
                     if (!arquivo.isEmpty()) {
+                        byte[] bytes = arquivo.getBytes();
+
+                        String new_name = RandomString.make(25) + "." + FilenameUtils.getExtension(arquivo.getOriginalFilename());
+
+                        Path caminho = Paths.get(diretorio_receitas + new_name);
+
+                        Files.write(caminho, bytes);
+
                         Receita receita = new Receita();
-                        receita.setArquivo(service.uploadFile(arquivo));
+                        receita.setArquivo(new_name);
                         receitas.add(receita);
+
                     }
-                } catch (Exception e) {
+                } catch (IOException e) {
+
                     throw new RuntimeException("Problemas na tentativa de salvar arquivo.", e);
                 }
             }

@@ -56,129 +56,6 @@ public class Service {
         categoria_repository.save(categoria_7);
 
 
-        /*
-        //Endereço
-        Endereco end_1 = new Endereco();
-        end_1.setDescricao("Casa");
-        end_1.setBairro("Tres Lagoas");
-        end_1.setEstado("PR");
-        end_1.setCidade("Foz do Iguaçu");
-        end_1.setLogradouro("Cesar Garcia da Rocha");
-        end_1.setNumero("515151");
-        end_1.setCep("85802702");
-        end_1.setPrincipal(true);
-        endereco_repository.save(end_1);
-
-        //Endereço
-        Endereco end_2 = new Endereco();
-        end_2.setDescricao("Trabalho");
-        end_2.setBairro("Centro");
-        end_2.setEstado("PR");
-        end_2.setCidade("Foz do Iguaçu");
-        end_2.setLogradouro("Almirante Barroso");
-        end_2.setNumero("4545");
-        end_2.setCep("85851010");
-        end_2.setPrincipal(true);
-        endereco_repository.save(end_2);
-
-        Endereco end_3 = new Endereco();
-        end_3.setDescricao("Casa");
-        end_3.setBairro("Porto Meira");
-        end_3.setEstado("PR");
-        end_3.setCidade("Foz do Iguaçu");
-        end_3.setLogradouro("Almirante Barroso");
-        end_3.setNumero("4545");
-        end_3.setCep("85851010");
-        end_3.setPrincipal(true);
-        endereco_repository.save(end_3);
-
-        Endereco end_4 = new Endereco();
-        end_4.setDescricao("Casa");
-        end_4.setBairro("Centro");
-        end_4.setEstado("PR");
-        end_4.setCidade("Foz do Iguaçu");
-        end_4.setLogradouro("Almirante Barroso");
-        end_4.setNumero("1424");
-        end_4.setCep("85851010");
-        end_4.setPrincipal(true);
-        endereco_repository.save(end_4);
-
-        Endereco end_5 = new Endereco();
-        end_5.setDescricao("Trabalho");
-        end_5.setBairro("Centro");
-        end_5.setEstado("PR");
-        end_5.setCidade("Foz do Iguaçu");
-        end_5.setLogradouro("Almirante Barroso");
-        end_5.setNumero("55553");
-        end_5.setCep("85851010");
-        end_5.setPrincipal(false);
-        endereco_repository.save(end_2);
-
-
-        //Adiciona as pessoas
-        Cliente cliente_1 = new Cliente();
-        cliente_1.setNome("Matheus Luan");
-        cliente_1.setCelular("45 9999999");
-        cliente_1.setLogin("matheus123");
-        cliente_1.setSenha(utils.passwordEncoder().encode("123"));
-
-        Cliente cliente_2 = new Cliente();
-        cliente_2.setCelular("45 9999999");
-        cliente_2.setLogin("ademir123");
-        cliente_2.setCpf("12114141");
-        cliente_2.setNome("Ademir Silva");
-        cliente_2.setSenha(utils.passwordEncoder().encode("123"));
-
-        Cliente cliente_3 = new Cliente();
-        cliente_3.setCelular("45 9999999");
-        cliente_3.setLogin("ramos123");
-        cliente_3.setCpf("1432414124");
-        cliente_3.setNome("João Ramos");
-        cliente_3.setSenha(utils.passwordEncoder().encode("123"));
-
-        Cliente cliente_4 = new Cliente();
-        cliente_4.setCelular("45 9999999");
-        cliente_4.setLogin("Flavia123");
-        cliente_4.setNome("Flavia Santos");
-        cliente_4.setCpf("12313213");
-        cliente_4.setSenha(utils.passwordEncoder().encode("123"));
-
-        List<Endereco> enderecos = new ArrayList<>();
-        List<Endereco> enderecos2 = new ArrayList<>();
-        List<Endereco> enderecos3 = new ArrayList<>();
-        List<Endereco> enderecos4 = new ArrayList<>();
-
-        enderecos.add(end_1);
-        enderecos.add(end_5);
-        cliente_1.setEnderecos(enderecos);
-
-        enderecos2.add(end_2);
-        cliente_2.setEnderecos(enderecos2);
-
-
-        enderecos3.add(end_3);
-        cliente_3.setEnderecos(enderecos3);
-
-
-        enderecos4.add(end_4);
-        cliente_4.setEnderecos(enderecos4);
-
-
-        Farmaceutico farmaceutico_1 = new Farmaceutico();
-        farmaceutico_1.setNome("Vinicius");
-        farmaceutico_1.setCrf("1515-15");
-        farmaceutico_1.setTelefone("45 9999999");
-        farmaceutico_1.setLogin("vini123");
-        farmaceutico_1.setSenha("123");
-
-        farmaceutico_repository.save(farmaceutico_1);
-        pessoa_repository.save(cliente_1);
-        pessoa_repository.save(cliente_2);
-        pessoa_repository.save(cliente_3);
-        pessoa_repository.save(cliente_4);
-
-        */
-
         //Adiciona as roles
         Role role_cliente = new Role();
         role_cliente.setRoleName(RoleName.ROLE_CLIENTE);
@@ -198,8 +75,11 @@ public class Service {
         produto_1.setFabricante("NeoQuimica");
         produto_1.setFormula("cloridrato de nafazolina 0,5mg/mL");
         produto_1.setCategoria(categoria_6);
+        produto_1.setBula("O Neosoro® de uso adulto apresenta como principio ativo cloridrato de nafazolina o qual é um descongestionante nasal de uso local (mucosa do nariz), com um rápido início de ação vasoconstritora (aproximadamente 10 minutos) e com efeito prolongado (entre 2 a 6 horas).\n" +
+                "\n" +
+                "É indicado no tratamento da congestão nasal (obstrução nasal) para o alívio dos sintomas em resfriados, quadros alérgicos nasais, rinites e rinossinusites.");
         //produto_1.setImagem("1_9rEGDbSSZ23MNFV5JSEOVQCVF.png");
-        produto_1.setImagem("https://www.istockphoto.com/br/foto/levita%C3%A7%C3%A3o-de-p%C3%ADlulas-em-um-fundo-preto-gm545582736-98385563?utm_source=pixabay&utm_medium=affiliate&utm_campaign=SRP_image_sponsored&utm_content=https%3A%2F%2Fpixabay.com%2Fpt%2Fimages%2Fsearch%2Fremedio%2F%3Fmanual_search%3D1&utm_term=remedio");
+        produto_1.setImagem("https://images.tcdn.com.br/img/img_prod/740081/neosoro_0_5mg_ml_com_gotejador_com_30ml_neo_quimica_1405_1_a19248bba6def076b1fe4701263e6128.jpg");
         produto_1.setPrecisa_receita(false);
         produto_1.setDescricao("Medicamento para descongestionamento nasal.");
 
@@ -208,7 +88,7 @@ public class Service {
         produto_2.setValor_unitario(2.00F);
         produto_2.setCategoria(categoria_5);
         produto_2.setPrecisa_receita(false);
-        produto_2.setImagem("https://www.google.com/imgres?imgurl=https%3A%2F%2Fstatic.vecteezy.com%2Fti%2Fvetor-gratis%2Fp1%2F1931805-icone-simbolo-na-garrafa-linha-e-preenchimento-estilo-simbolo-cruz-medica-gratis-vetor.jpg&imgrefurl=https%3A%2F%2Fpt.vecteezy.com%2Farte-vetorial%2F1931805-icone-simbolo-na-garrafa-linha-e-preenchimento-estilo-simbolo-cruz-medica&tbnid=OdEQey3QY49m9M&vet=12ahUKEwifm_GF3eX7AhVEBbkGHdiiCygQMygBegUIARDHAQ..i&docid=VnQvnW5g_sfoTM&w=980&h=980&q=medicamento&hl=pt-BR&ved=2ahUKEwifm_GF3eX7AhVEBbkGHdiiCygQMygBegUIARDHAQ");
+        produto_2.setImagem("https://paguemenos.vtexassets.com/arquivos/ids/274392/Analgesico-Aspirina-500mg-a%E2%82%AC%E2%80%9C-caixa-com-20-comprimidos-Pague-Menos-43534-2.jpg?v=637305908740470000");
         produto_2.setDescricao("Medicamento para alívio de dor de cabeça.");
 
         Produto produto_3 = new Produto();
@@ -217,7 +97,7 @@ public class Service {
         produto_3.setFabricante("Cotonete");
         produto_3.setUso("Uso adulto e infantil");
         //produto_3.setImagem("3_UyV0NIKde0vftivBf5sVuB5dN.jpg");
-        produto_3.setImagem("https://www.istockphoto.com/br/foto/levita%C3%A7%C3%A3o-de-p%C3%ADlulas-em-um-fundo-preto-gm545582736-98385563?utm_source=pixabay&utm_medium=affiliate&utm_campaign=SRP_image_sponsored&utm_content=https%3A%2F%2Fpixabay.com%2Fpt%2Fimages%2Fsearch%2Fremedio%2F%3Fmanual_search%3D1&utm_term=remedio");
+        produto_3.setImagem("https://castronaves.vteximg.com.br/arquivos/ids/357966-1000-1000/13546_01.jpg?v=637227476807670000");
         produto_3.setCategoria(categoria_1);
         produto_3.setPrecisa_receita(false);
         produto_3.setDescricao("Medicamento para limpar o ouvido.");
@@ -228,7 +108,7 @@ public class Service {
         produto_4.setConteudo("36 comprimidos");
         produto_4.setUso("Uso adulto e infantil");
         //produto_4.setImagem("4_whkkivzGALrFf5cAWHCNoiCib.png");
-        produto_4.setImagem("https://www.istockphoto.com/br/foto/levita%C3%A7%C3%A3o-de-p%C3%ADlulas-em-um-fundo-preto-gm545582736-98385563?utm_source=pixabay&utm_medium=affiliate&utm_campaign=SRP_image_sponsored&utm_content=https%3A%2F%2Fpixabay.com%2Fpt%2Fimages%2Fsearch%2Fremedio%2F%3Fmanual_search%3D1&utm_term=remedio");
+        produto_4.setImagem("https://www.drogarianet.com.br/media/product/84e/analgesico-dorflex-36-comprimidos-8ca.jpg");
         produto_4.setCategoria(categoria_5);
         produto_4.setPrecisa_receita(false);
         produto_4.setDescricao("Medicamento para dor no corpo em geral.");
@@ -237,8 +117,7 @@ public class Service {
         produto_5.setNome("Fralda XG");
         produto_5.setValor_unitario(65.00F);
         produto_5.setConteudo("60 unidades");
-        //produt5_4.setImagem("4_whkkivzGALrFf5cAWHCNoiCib.png");
-        produto_5.setImagem("https://www.istockphoto.com/br/foto/levita%C3%A7%C3%A3o-de-p%C3%ADlulas-em-um-fundo-preto-gm545582736-98385563?utm_source=pixabay&utm_medium=affiliate&utm_campaign=SRP_image_sponsored&utm_content=https%3A%2F%2Fpixabay.com%2Fpt%2Fimages%2Fsearch%2Fremedio%2F%3Fmanual_search%3D1&utm_term=remedio");
+        produto_5.setImagem("https://farmaciaindiana.vteximg.com.br/arquivos/ids/244801/7500435132459.jpg?v=637660370497570000");
         produto_5.setCategoria(categoria_4);
         produto_5.setUso("Uso infantil");
         produto_5.setPrecisa_receita(false);
@@ -248,8 +127,7 @@ public class Service {
         produto_6.setNome("Fralda G");
         produto_6.setValor_unitario(60.00F);
         produto_6.setConteudo("38 unidades");
-        //produt6_4.setImagem("4_whkkivzGALrFf5cAWHCNoiCib.png");
-        produto_6.setImagem("https://www.istockphoto.com/br/foto/levita%C3%A7%C3%A3o-de-p%C3%ADlulas-em-um-fundo-preto-gm545582736-98385563?utm_source=pixabay&utm_medium=affiliate&utm_campaign=SRP_image_sponsored&utm_content=https%3A%2F%2Fpixabay.com%2Fpt%2Fimages%2Fsearch%2Fremedio%2F%3Fmanual_search%3D1&utm_term=remedio");
+        produto_6.setImagem("https://hiperideal.vteximg.com.br/arquivos/ids/188571-1000-1000/2090910.jpg?v=637497685205430000");
         produto_6.setCategoria(categoria_4);
         produto_6.setPrecisa_receita(false);
         produto_6.setUso("Uso infantil");
@@ -259,8 +137,8 @@ public class Service {
         produto_7.setNome("Pomada de Assadura");
         produto_7.setValor_unitario(60.00F);
         produto_7.setConteudo("150 gramas");
-        produto_7.setImagem("https://www.istockphoto.com/br/foto/levita%C3%A7%C3%A3o-de-p%C3%ADlulas-em-um-fundo-preto-gm545582736-98385563?utm_source=pixabay&utm_medium=affiliate&utm_campaign=SRP_image_sponsored&utm_content=https%3A%2F%2Fpixabay.com%2Fpt%2Fimages%2Fsearch%2Fremedio%2F%3Fmanual_search%3D1&utm_term=remedio");
         produto_7.setCategoria(categoria_4);
+        produto_7.setImagem("https://cf.shopee.com.br/file/04725cf1ba91bdf6f691b622ca82c12a");
         produto_7.setPrecisa_receita(false);
         produto_7.setUso("Uso adulto e infantil");
         produto_7.setDescricao("Pomada para assaduras.");
@@ -269,8 +147,7 @@ public class Service {
         produto_8.setNome("Cefalexina");
         produto_8.setValor_unitario(77.00F);
         produto_8.setConteudo("100 ml");
-        //produt8_4.setImagem("4_whkkivzGALrFf5cAWHCNoiCib.png");
-        produto_8.setImagem("https://www.istockphoto.com/br/foto/levita%C3%A7%C3%A3o-de-p%C3%ADlulas-em-um-fundo-preto-gm545582736-98385563?utm_source=pixabay&utm_medium=affiliate&utm_campaign=SRP_image_sponsored&utm_content=https%3A%2F%2Fpixabay.com%2Fpt%2Fimages%2Fsearch%2Fremedio%2F%3Fmanual_search%3D1&utm_term=remedio");
+        produto_8.setImagem("https://d3ugyf2ht6aenh.cloudfront.net/stores/001/271/831/products/82441-754cd83a432ae80d6216155961454729-640-0.jpg");
         produto_8.setCategoria(categoria_2);
         produto_8.setUso("Uso adulto e infantil");
         produto_8.setPrecisa_receita(true);
@@ -280,8 +157,7 @@ public class Service {
         produto_9.setNome("Amoxicilina");
         produto_9.setValor_unitario(77.00F);
         produto_9.setConteudo("100 ml");
-        //produt9_4.setImagem("4_whkkivzGALrFf5cAWHCNoiCib.png");
-        produto_9.setImagem("https://www.istockphoto.com/br/foto/levita%C3%A7%C3%A3o-de-p%C3%ADlulas-em-um-fundo-preto-gm545582736-98385563?utm_source=pixabay&utm_medium=affiliate&utm_campaign=SRP_image_sponsored&utm_content=https%3A%2F%2Fpixabay.com%2Fpt%2Fimages%2Fsearch%2Fremedio%2F%3Fmanual_search%3D1&utm_term=remedio");
+        produto_9.setImagem("https://images.tcdn.com.br/img/img_prod/479811/agemoxi_cl_250_mg_antibacteriano_caes_e_gatos_a_base_de_amoxicilina_triidratada_e_clavulanato_de_pot_1221_1_7e3dbcc95acb1832fd2cf607a2c0451b.jpeg");
         produto_9.setCategoria(categoria_2);
         produto_9.setUso("Uso adulto e infantil");
         produto_9.setPrecisa_receita(true);
@@ -291,8 +167,7 @@ public class Service {
         produto_10.setNome("Penicilina");
         produto_10.setValor_unitario(41.00F);
         produto_10.setConteudo("130 ml");
-        //produt10_4.setImagem("4_whkkivzGALrFf5cAWHCNoiCib.png");
-        produto_10.setImagem("https://www.istockphoto.com/br/foto/levita%C3%A7%C3%A3o-de-p%C3%ADlulas-em-um-fundo-preto-gm545582736-98385563?utm_source=pixabay&utm_medium=affiliate&utm_campaign=SRP_image_sponsored&utm_content=https%3A%2F%2Fpixabay.com%2Fpt%2Fimages%2Fsearch%2Fremedio%2F%3Fmanual_search%3D1&utm_term=remedio");
+        produto_10.setImagem("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJgH1jmXIfoMXucu7_nTy-5BPljM4t8s0axA&usqp=CAU");
         produto_10.setCategoria(categoria_2);
         produto_10.setUso("Uso adulto e infantil");
         produto_10.setPrecisa_receita(true);
