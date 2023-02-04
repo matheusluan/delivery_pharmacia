@@ -35,7 +35,7 @@ public class VendaController {
 
     @Autowired
     private StorageService service;
-    static String diretorio_receitas = "/imagens/receitas/";
+    static String diretorio_receitas = "~/imagens/receitas/";
 
     @GetMapping("/venda")
     public List<Venda> getAllVenda() {
