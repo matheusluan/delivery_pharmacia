@@ -214,7 +214,7 @@ public class UsuarioController {
                 }
 
                 if (usuario.getCrf() != null) {
-                    old_usuario.setCpf(usuario.getCpf());
+                    old_usuario.setCrf(usuario.getCrf());
                 }
 
                 if (usuario.getUsername() != null) {
