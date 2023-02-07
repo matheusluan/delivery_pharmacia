@@ -32,7 +32,7 @@ public class ProdutoController {
     public  List<Produto> getProdutoByDesc(@RequestParam String nome){
 
         if(nome != null ){
-            return repository.findByNomeContains(nome);
+            return repository.findByNomeContainingIgnoreCase(nome);
         }else
             throw new RuntimeException("Filtro vazio");
 
